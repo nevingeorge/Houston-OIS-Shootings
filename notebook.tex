@@ -1,0 +1,1460 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Houston OIS Report}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Houston OIS Report}\label{houston-ois-report}
+
+The following notebook analyzes OIS (officer-involved shootings) data
+collected by the Houston Police Department from 2015 to 2018 along with
+US census data. It does a comparison with a previous study as well as
+provide some new, interesting results.
+
+Link to previous study:
+https://www.houstontx.gov/police/department\_reports/ois/HPDThesis.pdf
+
+    \begin{figure}
+\centering
+\includegraphics{attachment:Screen\%20Shot\%202018-09-17\%20at\%209.04.28\%20PM.png}
+\caption{Screen\%20Shot\%202018-09-17\%20at\%209.04.28\%20PM.png}
+\end{figure}
+
+    Police shootings have greatly decreased since the passing of Art. 2.139
+of the Texas Code of Criminal Procedure that requires all law
+enforcement agencies to report all shootings. This notebook will analyze
+trends in the data from 2015-2018 and see how they differ from the
+trends reported by the previous study that analyzed data from before
+2015.
+
+    \section{Processing the Data}\label{processing-the-data}
+
+    \subsubsection{Loading the dataset}\label{loading-the-dataset}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}167}]:} \PY{c+c1}{\PYZsh{} Load libraries}
+          \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np} 
+          \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd} 
+          \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{linear\PYZus{}model}\PY{p}{,} \PY{n}{metrics}
+          \PY{k+kn}{from} \PY{n+nn}{subprocess} \PY{k}{import} \PY{n}{check\PYZus{}output}
+          \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+          
+          \PY{c+c1}{\PYZsh{} Load dataset}
+          \PY{n}{dataset} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/Users/nevingeorge/Desktop/CS/Python/Houston OIS/Combined Data.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Display beginning of dataset}
+          \PY{n}{pd}\PY{o}{.}\PY{n}{set\PYZus{}option}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{display.max\PYZus{}columns}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{k+kc}{None}\PY{p}{)}
+          \PY{n}{dataset}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}167}]:}       DATE   INC NO.         LOCATION SUSPECT SEX SUSPECT RACE SUSPECT AGE  \textbackslash{}
+          0  7/26/18  95218318     4600 Tidwell           M            B          17   
+          1  7/26/18  95218318     4600 Tidwell           M            B          19   
+          2  7/15/18  90024918  8600 Helmers St           M            H          18   
+          3  6/22/18  79427318  3434 Tidwell Rd           M            H          33   
+          4  6/18/18  77476418    10800 Sabo Rd           M            H          37   
+          
+            SUSPECT INJURY SUSPECT WEAPON OFFICER SEX 1 OFFICER RACE 1  OFFICER AGE 1  \textbackslash{}
+          0           None        Firearm             M              H             29   
+          1        Wounded        Firearm             M              H             29   
+          2        Wounded        Firearm             M              W             29   
+          3           None        Firearm             M              B             44   
+          4           None          Other             M              W             56   
+          
+            OFFICER INJURY 1 ON DUTY 1 OFFICER SEX 2 OFFICER RACE 2  OFFICER AGE 2  \textbackslash{}
+          0             None         Y           NaN            NaN            NaN   
+          1             None         Y           NaN            NaN            NaN   
+          2             None         Y           NaN            NaN            NaN   
+          3             None         N           NaN            NaN            NaN   
+          4             None         Y           NaN            NaN            NaN   
+          
+            OFFICER INJURY 2 ON DUTY 2 OFFICER SEX 3 OFFICER RACE 3  OFFICER AGE 3  \textbackslash{}
+          0              NaN       NaN           NaN            NaN            NaN   
+          1              NaN       NaN           NaN            NaN            NaN   
+          2              NaN       NaN           NaN            NaN            NaN   
+          3              NaN       NaN           NaN            NaN            NaN   
+          4              NaN       NaN           NaN            NaN            NaN   
+          
+            OFFICER INJURY 3 ON DUTY 3 OFFICER SEX 4 OFFICER RACE 4  OFFICER AGE 4  \textbackslash{}
+          0              NaN       NaN           NaN            NaN            NaN   
+          1              NaN       NaN           NaN            NaN            NaN   
+          2              NaN       NaN           NaN            NaN            NaN   
+          3              NaN       NaN           NaN            NaN            NaN   
+          4              NaN       NaN           NaN            NaN            NaN   
+          
+            OFFICER INJURY 4 ON DUTY 4 OFFICER SEX 5 OFFICER RACE 5  OFFICER AGE 5  \textbackslash{}
+          0              NaN       NaN           NaN            NaN            NaN   
+          1              NaN       NaN           NaN            NaN            NaN   
+          2              NaN       NaN           NaN            NaN            NaN   
+          3              NaN       NaN           NaN            NaN            NaN   
+          4              NaN       NaN           NaN            NaN            NaN   
+          
+            OFFICER INJURY 5 ON DUTY 5 OFFICER SEX 6 OFFICER RACE 6  OFFICER AGE 6  \textbackslash{}
+          0              NaN       NaN           NaN            NaN            NaN   
+          1              NaN       NaN           NaN            NaN            NaN   
+          2              NaN       NaN           NaN            NaN            NaN   
+          3              NaN       NaN           NaN            NaN            NaN   
+          4              NaN       NaN           NaN            NaN            NaN   
+          
+            OFFICER INJURY 6 ON DUTY 6 OFFICER SEX 7 OFFICER RACE 7  OFFICER AGE 7  \textbackslash{}
+          0              NaN       NaN           NaN            NaN            NaN   
+          1              NaN       NaN           NaN            NaN            NaN   
+          2              NaN       NaN           NaN            NaN            NaN   
+          3              NaN       NaN           NaN            NaN            NaN   
+          4              NaN       NaN           NaN            NaN            NaN   
+          
+            OFFICER INJURY 7 ON DUTY 7   RESPONSE TYPE NUM OF OFFICERS SYNOPSIS  
+          0              NaN       NaN           Other       2 or More      NaN  
+          1              NaN       NaN           Other       2 or More      NaN  
+          2              NaN       NaN  Emergency Call       2 or More      NaN  
+          3              NaN       NaN  Emergency Call               1      NaN  
+          4              NaN       NaN  Emergency Call               1      NaN  
+\end{Verbatim}
+            
+    \subsubsection{Adding and deleting data}\label{adding-and-deleting-data}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}168}]:} \PY{c+c1}{\PYZsh{}delete useless column}
+          \PY{n}{dataset}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{INC NO.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}adding US Census data on the racial demographics of Houston}
+          \PY{n}{races} \PY{o}{=} \PY{p}{[}\PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SUSPECT RACE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{B}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SUSPECT RACE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{H}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SUSPECT RACE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{W}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SUSPECT RACE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{A}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{n}{numbers} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{498466}\PY{p}{,} \PY{l+m+mi}{919668}\PY{p}{,} \PY{l+m+mi}{1060491}\PY{p}{,}\PY{l+m+mi}{126378}\PY{p}{]}
+          \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Population of Suspect Race}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{select}\PY{p}{(}\PY{n}{races}\PY{p}{,} \PY{n}{numbers}\PY{p}{,} \PY{n}{default}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{zero}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{n}{dataset}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}168}]:}       DATE         LOCATION SUSPECT SEX SUSPECT RACE SUSPECT AGE  \textbackslash{}
+          0  7/26/18     4600 Tidwell           M            B          17   
+          1  7/26/18     4600 Tidwell           M            B          19   
+          2  7/15/18  8600 Helmers St           M            H          18   
+          3  6/22/18  3434 Tidwell Rd           M            H          33   
+          4  6/18/18    10800 Sabo Rd           M            H          37   
+          
+            SUSPECT INJURY SUSPECT WEAPON OFFICER SEX 1 OFFICER RACE 1  OFFICER AGE 1  \textbackslash{}
+          0           None        Firearm             M              H             29   
+          1        Wounded        Firearm             M              H             29   
+          2        Wounded        Firearm             M              W             29   
+          3           None        Firearm             M              B             44   
+          4           None          Other             M              W             56   
+          
+            OFFICER INJURY 1 ON DUTY 1 OFFICER SEX 2 OFFICER RACE 2  OFFICER AGE 2  \textbackslash{}
+          0             None         Y           NaN            NaN            NaN   
+          1             None         Y           NaN            NaN            NaN   
+          2             None         Y           NaN            NaN            NaN   
+          3             None         N           NaN            NaN            NaN   
+          4             None         Y           NaN            NaN            NaN   
+          
+            OFFICER INJURY 2 ON DUTY 2 OFFICER SEX 3 OFFICER RACE 3  OFFICER AGE 3  \textbackslash{}
+          0              NaN       NaN           NaN            NaN            NaN   
+          1              NaN       NaN           NaN            NaN            NaN   
+          2              NaN       NaN           NaN            NaN            NaN   
+          3              NaN       NaN           NaN            NaN            NaN   
+          4              NaN       NaN           NaN            NaN            NaN   
+          
+            OFFICER INJURY 3 ON DUTY 3 OFFICER SEX 4 OFFICER RACE 4  OFFICER AGE 4  \textbackslash{}
+          0              NaN       NaN           NaN            NaN            NaN   
+          1              NaN       NaN           NaN            NaN            NaN   
+          2              NaN       NaN           NaN            NaN            NaN   
+          3              NaN       NaN           NaN            NaN            NaN   
+          4              NaN       NaN           NaN            NaN            NaN   
+          
+            OFFICER INJURY 4 ON DUTY 4 OFFICER SEX 5 OFFICER RACE 5  OFFICER AGE 5  \textbackslash{}
+          0              NaN       NaN           NaN            NaN            NaN   
+          1              NaN       NaN           NaN            NaN            NaN   
+          2              NaN       NaN           NaN            NaN            NaN   
+          3              NaN       NaN           NaN            NaN            NaN   
+          4              NaN       NaN           NaN            NaN            NaN   
+          
+            OFFICER INJURY 5 ON DUTY 5 OFFICER SEX 6 OFFICER RACE 6  OFFICER AGE 6  \textbackslash{}
+          0              NaN       NaN           NaN            NaN            NaN   
+          1              NaN       NaN           NaN            NaN            NaN   
+          2              NaN       NaN           NaN            NaN            NaN   
+          3              NaN       NaN           NaN            NaN            NaN   
+          4              NaN       NaN           NaN            NaN            NaN   
+          
+            OFFICER INJURY 6 ON DUTY 6 OFFICER SEX 7 OFFICER RACE 7  OFFICER AGE 7  \textbackslash{}
+          0              NaN       NaN           NaN            NaN            NaN   
+          1              NaN       NaN           NaN            NaN            NaN   
+          2              NaN       NaN           NaN            NaN            NaN   
+          3              NaN       NaN           NaN            NaN            NaN   
+          4              NaN       NaN           NaN            NaN            NaN   
+          
+            OFFICER INJURY 7 ON DUTY 7   RESPONSE TYPE NUM OF OFFICERS SYNOPSIS  \textbackslash{}
+          0              NaN       NaN           Other       2 or More      NaN   
+          1              NaN       NaN           Other       2 or More      NaN   
+          2              NaN       NaN  Emergency Call       2 or More      NaN   
+          3              NaN       NaN  Emergency Call               1      NaN   
+          4              NaN       NaN  Emergency Call               1      NaN   
+          
+            Population of Suspect Race  
+          0                     498466  
+          1                     498466  
+          2                     919668  
+          3                     919668  
+          4                     919668  
+\end{Verbatim}
+            
+    \section{Visualizing the Data}\label{visualizing-the-data}
+
+    \subsection{Suspect data}\label{suspect-data}
+
+    \subsubsection{Suspect age distribution}\label{suspect-age-distribution}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}169}]:} \PY{n}{ages} \PY{o}{=} \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SUSPECT AGE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{(}\PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SUSPECT AGE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{!=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{UNK}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Juvenile}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{18}\PY{p}{)}
+          \PY{n}{ages} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}numeric}\PY{p}{(}\PY{n}{ages}\PY{p}{,} \PY{n}{errors}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{coerce}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{int64}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Suspect age distribution}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{ages}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}169}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1a201d1f98>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{figure}
+\centering
+\includegraphics{attachment:Suspect\%20age.png}
+\caption{Suspect\%20age.png}
+\end{figure}
+
+    Juveniles are all the 18 year olds (unknown age). Both of the graphs of
+peaks at the 20-29 age group.
+
+    \subsubsection{Suspect gender
+distribution}\label{suspect-gender-distribution}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}170}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{countplot}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{dataset}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SUSPECT SEX}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Suspect gender distribution}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}170}]:} Text(0.5,1,'Suspect gender distribution')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{figure}
+\centering
+\includegraphics{attachment:Suspect\%20gender.png}
+\caption{Suspect\%20gender.png}
+\end{figure}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}171}]:} \PY{n}{dataset}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SUSPECT SEX}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}171}]:} M           97
+          Juvenile    12
+          F            7
+          Name: SUSPECT SEX, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}172}]:} \PY{n}{m1} \PY{o}{=} \PY{l+m+mf}{97.0}\PY{o}{/}\PY{p}{(}\PY{l+m+mf}{97.0}\PY{o}{+}\PY{l+m+mf}{7.0}\PY{p}{)}
+          \PY{n}{m2} \PY{o}{=} \PY{l+m+mf}{181.0}\PY{o}{/}\PY{p}{(}\PY{l+m+mf}{181.0}\PY{o}{+}\PY{l+m+mf}{9.0}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Current data: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{m1}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Study: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{m2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Current data: 0.9326923076923077
+
+Study: 0.9526315789473684
+
+    \end{Verbatim}
+
+    The juveniles don't have a listed sex. In both graphs, significantly
+more male than female suspects are shot. Roughly 1 out of every 20
+suspects in both graphs are female.
+
+    \subsubsection{Distribution of suspects by
+race}\label{distribution-of-suspects-by-race}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}173}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{countplot}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{dataset}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SUSPECT RACE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Distributions of suspects by race}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}173}]:} Text(0.5,1,'Distributions of suspects by race')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{figure}
+\centering
+\includegraphics{attachment:Suspect\%20race.png}
+\caption{Suspect\%20race.png}
+\end{figure}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}174}]:} \PY{n}{dataset}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SUSPECT RACE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}174}]:} B           61
+          H           29
+          Juvenile    12
+          W           10
+          U            3
+          Name: SUSPECT RACE, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}175}]:} \PY{n}{total1} \PY{o}{=} \PY{l+m+mi}{61} \PY{o}{+} \PY{l+m+mi}{29} \PY{o}{+} \PY{l+m+mi}{10} \PY{o}{+} \PY{l+m+mi}{1}
+          \PY{n}{black1} \PY{o}{=} \PY{l+m+mf}{61.0}\PY{o}{/}\PY{n}{total1}
+          \PY{n}{his1} \PY{o}{=} \PY{l+m+mf}{29.0}\PY{o}{/}\PY{n}{total1}
+          \PY{n}{white1} \PY{o}{=} \PY{l+m+mf}{10.0}\PY{o}{/}\PY{n}{total1}
+          \PY{n}{asian1} \PY{o}{=} \PY{l+m+mf}{1.0}\PY{o}{/}\PY{n}{total1}
+          
+          \PY{n}{total2} \PY{o}{=} \PY{l+m+mi}{2} \PY{o}{+} \PY{l+m+mi}{108} \PY{o}{+} \PY{l+m+mi}{55} \PY{o}{+} \PY{l+m+mi}{25}
+          \PY{n}{black2} \PY{o}{=} \PY{l+m+mf}{108.0}\PY{o}{/}\PY{n}{total2}
+          \PY{n}{his2} \PY{o}{=} \PY{l+m+mf}{55.0}\PY{o}{/}\PY{n}{total2}
+          \PY{n}{white2} \PY{o}{=} \PY{l+m+mf}{25.0}\PY{o}{/}\PY{n}{total2}
+          \PY{n}{asian2} \PY{o}{=} \PY{l+m+mf}{2.0}\PY{o}{/}\PY{n}{total2}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Current data distribution of blacks, hispanics, whites, and asians: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{black1}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{his1}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{white1}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{asian1}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Study distribution of blacks, hispanics, whites, and asians: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{black2}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{his2}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{white2}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{asian2}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Current data distribution of blacks, hispanics, whites, and asians: 0.6039603960396039 0.2871287128712871 0.09900990099009901 0.009900990099009901
+
+Study distribution of blacks, hispanics, whites, and asians: 0.5684210526315789 0.2894736842105263 0.13157894736842105 0.010526315789473684
+
+
+    \end{Verbatim}
+
+    B - black, H - hispanic, W - white, A - asian, U - unknown
+
+Both studies had roughly the same suspect racial distributions. In both
+studies, the percentage of black suspects is around 55-60\% and the
+percentage of hispanic suspects is around 28\%; however, the percentage
+of white suspects in each is only around 9-13\%.
+
+    \subsubsection{Suspect injuries}\label{suspect-injuries}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}176}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{countplot}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{dataset}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SUSPECT INJURY}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Suspect injuries}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}176}]:} Text(0.5,1,'Suspect injuries')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{figure}
+\centering
+\includegraphics{attachment:Suspect\%20injuries.png}
+\caption{Suspect\%20injuries.png}
+\end{figure}
+
+    There is no data for juveniles. The largest group in both graphs out of
+killed, wounded, and no injury is wounded.
+
+    \subsubsection{Suspect weapon}\label{suspect-weapon}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}177}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{countplot}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{dataset}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SUSPECT WEAPON}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Suspect weapon}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}177}]:} Text(0.5,1,'Suspect weapon')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_31_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{figure}
+\centering
+\includegraphics{attachment:Suspect\%20weapon\%20specific.png}
+\caption{Suspect\%20weapon\%20specific.png}
+\end{figure}
+
+    In both graphs, most suspects, if they had a weapon, had a firearm.
+
+    \subsection{Officer data}\label{officer-data}
+
+    \subsubsection{Load in officer data in an easier to use
+format}\label{load-in-officer-data-in-an-easier-to-use-format}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}178}]:} \PY{c+c1}{\PYZsh{}dataset contains all of the officer data in 5 unified rows}
+          \PY{n}{officerDS} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/Users/nevingeorge/Desktop/CS/Python/Houston OIS/Officer Data.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Display beginning of dataset}
+          \PY{n}{pd}\PY{o}{.}\PY{n}{set\PYZus{}option}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{display.max\PYZus{}rows}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}
+          \PY{n}{pd}\PY{o}{.}\PY{n}{set\PYZus{}option}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{display.max\PYZus{}columns}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{k+kc}{None}\PY{p}{)}
+          \PY{n}{officerDS}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}178}]:}   OFFICER SEX OFFICER RACE  OFFICER AGE OFFICER INJURY ON DUTY
+          0           M            H           29           None       Y
+          1           M            H           29           None       Y
+          2           M            W           29           None       Y
+          3           M            B           44           None       N
+          4           M            W           56           None       Y
+\end{Verbatim}
+            
+    \subsubsection{Officer age distribution}\label{officer-age-distribution}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}179}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Officer age distribution}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{officerDS}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER AGE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}179}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1a20aa6ac8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_38_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{figure}
+\centering
+\includegraphics{attachment:Officer\%20age.png}
+\caption{Officer\%20age.png}
+\end{figure}
+
+    Both graphs have a peak at 30-39. However, the graph of the current data
+also has a small peak at around 50.
+
+    \subsubsection{Officer gender
+distribution}\label{officer-gender-distribution}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}180}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{countplot}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{officerDS}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER SEX}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Officer gender distribution}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}180}]:} Text(0.5,1,'Officer gender distribution')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_42_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{figure}
+\centering
+\includegraphics{attachment:Officer\%20gender.png}
+\caption{Officer\%20gender.png}
+\end{figure}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}181}]:} \PY{n}{m} \PY{o}{=} \PY{l+m+mf}{184.0}\PY{o}{/}\PY{p}{(}\PY{l+m+mf}{184.0}\PY{o}{+}\PY{l+m+mf}{11.0}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{m}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.9435897435897436
+
+    \end{Verbatim}
+
+    100\% of the officers in the current data are males. This is surprising,
+suggesting that including more females in the police force can affect
+these results and potentially decrease the number of shootings. In the
+study, around 94\% of the officers are male, so in both studies the vast
+majority of officers are male.
+
+    \subsubsection{Distribution of officers by
+race}\label{distribution-of-officers-by-race}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}182}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{countplot}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{officerDS}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER RACE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Distributions of officers by race}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}182}]:} Text(0.5,1,'Distributions of officers by race')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_47_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{figure}
+\centering
+\includegraphics{attachment:Officer\%20race.png}
+\caption{Officer\%20race.png}
+\end{figure}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}183}]:} \PY{n}{officerDS}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{OFFICER RACE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}183}]:} W    115
+          H     65
+          B     19
+          P      5
+          Name: OFFICER RACE, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}184}]:} \PY{n}{w1} \PY{o}{=} \PY{l+m+mf}{115.0}\PY{o}{/}\PY{p}{(}\PY{l+m+mf}{115.0}\PY{o}{+}\PY{l+m+mf}{65.0}\PY{o}{+}\PY{l+m+mf}{19.0}\PY{o}{+}\PY{l+m+mf}{5.0}\PY{p}{)}
+          \PY{n}{w2} \PY{o}{=} \PY{l+m+mf}{90.0}\PY{o}{/}\PY{p}{(}\PY{l+m+mf}{90.0}\PY{o}{+}\PY{l+m+mf}{49.0}\PY{o}{+}\PY{l+m+mf}{45.0}\PY{o}{+}\PY{l+m+mf}{7.0}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Current data proportion of white officers: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{w1}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Study proportion of white officers: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{w2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Current data proportion of white officers: 0.5637254901960784
+Study proportion of white officers: 0.4712041884816754
+
+    \end{Verbatim}
+
+    There is a greater percentage of white officers in the current data.
+
+    \subsubsection{Number of officers at the
+scene}\label{number-of-officers-at-the-scene}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}185}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{countplot}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{dataset}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NUM OF OFFICERS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of officers at the scene}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}185}]:} Text(0.5,1,'Number of officers at the scene')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_53_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{figure}
+\centering
+\includegraphics{attachment:Number\%20of\%20officers\%20on\%20scene.png}
+\caption{Number\%20of\%20officers\%20on\%20scene.png}
+\end{figure}
+
+    Most scenes only had a single officer there, suggesting that there is a
+higher chance of an OIS if an officer is alone.
+
+    \subsubsection{Officer on duty}\label{officer-on-duty}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}186}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{countplot}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{officerDS}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ON DUTY}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Officer on duty}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}186}]:} Text(0.5,1,'Officer on duty')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_57_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{figure}
+\centering
+\includegraphics{attachment:Officer\%20on\%20duty.png}
+\caption{Officer\%20on\%20duty.png}
+\end{figure}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}187}]:} \PY{n}{officerDS}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ON DUTY}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}187}]:} Y    176
+          N     28
+          Name: ON DUTY, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}188}]:} \PY{n}{od1} \PY{o}{=} \PY{l+m+mf}{176.0}\PY{o}{/}\PY{p}{(}\PY{l+m+mf}{176.0}\PY{o}{+}\PY{l+m+mf}{28.0}\PY{p}{)}
+          \PY{n}{od2} \PY{o}{=} \PY{l+m+mf}{154.0}\PY{o}{/}\PY{p}{(}\PY{l+m+mf}{154.0}\PY{o}{+}\PY{l+m+mf}{18.0}\PY{p}{)}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Current data proportion of officers that were on duty during the incident: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{od1}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Study proportion of officers that were on duty during the incident: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{od2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Current data proportion of officers that were on duty during the incident: 0.8627450980392157
+
+Study proportion of officers that were on duty during the incident: 0.8953488372093024
+
+    \end{Verbatim}
+
+    In both studies, 85-90\% of the officers were on duty.
+
+    \subsection{Additional Data}\label{additional-data}
+
+    \subsubsection{Suspects as a proportion of their respective race in
+Houston}\label{suspects-as-a-proportion-of-their-respective-race-in-houston}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}189}]:} \PY{c+c1}{\PYZsh{}List of number of people killed by race}
+          \PY{n}{races} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{B}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{H}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{W}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{A}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{n}{numbers} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{498466}\PY{p}{,} \PY{l+m+mi}{919668}\PY{p}{,} \PY{l+m+mi}{1060491}\PY{p}{,} \PY{l+m+mi}{126378}\PY{p}{]}
+          \PY{n}{suspect\PYZus{}by\PYZus{}race} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{races}\PY{p}{:}
+              \PY{n}{i\PYZus{}suspect} \PY{o}{=} \PY{n}{dataset}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SUSPECT RACE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{(}\PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SUSPECT RACE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{n}{i}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+              \PY{n}{suspect\PYZus{}by\PYZus{}race}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i\PYZus{}suspect}\PY{p}{)}
+              
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{suspect\PYZus{}by\PYZus{}race}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[61, 29, 10, 1]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}190}]:} \PY{c+c1}{\PYZsh{}calculate proportions}
+          \PY{n}{prop\PYZus{}suspect\PYZus{}by\PYZus{}race} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{races}\PY{p}{:}
+              
+              \PY{k}{if} \PY{n}{i} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{B}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+                  \PY{n}{prop\PYZus{}i\PYZus{}suspect} \PY{o}{=} \PY{n}{suspect\PYZus{}by\PYZus{}race}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{498466}
+                  \PY{n+nb}{print}\PY{p}{(}\PY{n}{prop\PYZus{}i\PYZus{}suspect}\PY{p}{)}
+              \PY{k}{elif} \PY{n}{i} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{H}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+                  \PY{n}{prop\PYZus{}i\PYZus{}suspect} \PY{o}{=} \PY{n}{suspect\PYZus{}by\PYZus{}race}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{919668}
+                  \PY{n+nb}{print}\PY{p}{(}\PY{n}{prop\PYZus{}i\PYZus{}suspect}\PY{p}{)}
+              \PY{k}{elif} \PY{n}{i} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{W}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+                  \PY{n}{prop\PYZus{}i\PYZus{}suspect} \PY{o}{=} \PY{n}{suspect\PYZus{}by\PYZus{}race}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{1060491}
+                  \PY{n+nb}{print}\PY{p}{(}\PY{n}{prop\PYZus{}i\PYZus{}suspect}\PY{p}{)}
+              \PY{k}{else}\PY{p}{:}
+                  \PY{n}{prop\PYZus{}i\PYZus{}suspect} \PY{o}{=} \PY{n}{suspect\PYZus{}by\PYZus{}race}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{126378}
+                  \PY{n+nb}{print}\PY{p}{(}\PY{n}{prop\PYZus{}i\PYZus{}suspect}\PY{p}{)}
+              
+              \PY{n}{prop\PYZus{}suspect\PYZus{}by\PYZus{}race}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{prop\PYZus{}i\PYZus{}suspect}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.00012237544787407768
+3.153311847318815e-05
+9.429594404855864e-06
+7.912769627625061e-06
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}191}]:} \PY{c+c1}{\PYZsh{}plot proportions}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{14}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Suspects as a proportion of their respective race}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{barplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{races}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{prop\PYZus{}suspect\PYZus{}by\PYZus{}race}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}191}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1a214d5668>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_66_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    This shows blacks are killed at a disproportionate number compared to
+hispanics, whites, and asians with respect to the population size of
+each race in Houston.
+
+    \subsubsection{Comparing the suspect age distributions of blacks,
+hispanics, whites, and
+asians}\label{comparing-the-suspect-age-distributions-of-blacks-hispanics-whites-and-asians}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}192}]:} \PY{c+c1}{\PYZsh{}dataset with the three races}
+          \PY{n}{tempDS} \PY{o}{=} \PY{n}{dataset}
+          \PY{n}{tempDS}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SUSPECT AGE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}numeric}\PY{p}{(}\PY{n}{tempDS}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SUSPECT AGE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{errors}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{coerce}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{int64}\PY{p}{)}
+          \PY{n}{four\PYZus{}races} \PY{o}{=} \PY{n}{tempDS}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{(}\PY{n}{tempDS}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SUSPECT RACE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{B}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{o}{|} \PY{p}{(}\PY{n}{tempDS}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SUSPECT RACE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{H}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{o}{|} \PY{p}{(}\PY{n}{tempDS}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SUSPECT RACE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{W}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{o}{|} \PY{p}{(}\PY{n}{tempDS}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SUSPECT RACE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{A}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{]}
+          
+          \PY{n}{g} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{FacetGrid}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{four\PYZus{}races}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SUSPECT RACE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{aspect}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+          \PY{n}{g}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{n}{sns}\PY{o}{.}\PY{n}{kdeplot}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SUSPECT AGE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{shade}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{g}\PY{o}{.}\PY{n}{add\PYZus{}legend}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Race}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}ylabels}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Count}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Age distribution by race}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{17}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}output averages ages of the three races}
+          \PY{n}{avg\PYZus{}age\PYZus{}b} \PY{o}{=} \PY{n}{tempDS}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SUSPECT AGE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{p}{(}\PY{n}{tempDS}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SUSPECT RACE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{B}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)} 
+          \PY{n}{avg\PYZus{}age\PYZus{}h} \PY{o}{=} \PY{n}{tempDS}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SUSPECT AGE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{p}{(}\PY{n}{tempDS}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SUSPECT RACE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{H}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)} 
+          \PY{n}{avg\PYZus{}age\PYZus{}w} \PY{o}{=} \PY{n}{tempDS}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SUSPECT AGE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{p}{(}\PY{n}{tempDS}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SUSPECT RACE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{W}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)} 
+          \PY{n}{avg\PYZus{}age\PYZus{}a} \PY{o}{=} \PY{n}{tempDS}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SUSPECT AGE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{p}{(}\PY{n}{tempDS}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SUSPECT RACE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{A}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}                                                                                                 
+          
+          \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average age of black victims is }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{avg\PYZus{}age\PYZus{}b}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average age of hispanic victims is }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{avg\PYZus{}age\PYZus{}h}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average age of white victims is }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{avg\PYZus{}age\PYZus{}w}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average age of asian victims is }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{avg\PYZus{}age\PYZus{}a}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Average age of black victims is 28.14814814814815
+Average age of hispanic victims is 27.428571428571427
+Average age of white victims is 37.9
+Average age of asian victims is 21.0
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/anaconda3/lib/python3.6/site-packages/numpy/core/\_methods.py:135: RuntimeWarning: Degrees of freedom <= 0 for slice
+  keepdims=keepdims)
+/anaconda3/lib/python3.6/site-packages/numpy/core/\_methods.py:127: RuntimeWarning: invalid value encountered in double\_scalars
+  ret = ret.dtype.type(ret / rcount)
+/anaconda3/lib/python3.6/site-packages/statsmodels/nonparametric/bandwidths.py:22: RuntimeWarning: invalid value encountered in minimum
+  return np.minimum(np.std(X, axis=0, ddof=1), IQR)
+/anaconda3/lib/python3.6/site-packages/numpy/core/\_methods.py:26: RuntimeWarning: invalid value encountered in reduce
+  return umr\_maximum(a, axis, None, out, keepdims)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_69_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Whites suspects are on average around 10 years older than black and
+hispanic suspects. There is only 1 asian suspect, so there is not enough
+data there for comparison.
+
+    \subsubsection{Officer injuries}\label{officer-injuries}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}193}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{countplot}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{officerDS}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER INJURY}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Officer injuries}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}193}]:} Text(0.5,1,'Officer injuries')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_72_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}194}]:} \PY{n}{officerDS}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{OFFICER INJURY}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}194}]:} None       197
+          Wounded      7
+          Name: OFFICER INJURY, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}195}]:} \PY{n}{oi} \PY{o}{=} \PY{l+m+mf}{197.0}\PY{o}{/}\PY{p}{(}\PY{l+m+mf}{197.0}\PY{o}{+}\PY{l+m+mf}{7.0}\PY{p}{)}
+          \PY{n}{oi}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}195}]:} 0.9656862745098039
+\end{Verbatim}
+            
+    Most officers were not wounded.
+
+    \section{Analyze the Data}\label{analyze-the-data}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}196}]:} \PY{n}{dataset}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}196}]:}       DATE         LOCATION SUSPECT SEX SUSPECT RACE  SUSPECT AGE  \textbackslash{}
+          0  7/26/18     4600 Tidwell           M            B         17.0   
+          1  7/26/18     4600 Tidwell           M            B         19.0   
+          2  7/15/18  8600 Helmers St           M            H         18.0   
+          3  6/22/18  3434 Tidwell Rd           M            H         33.0   
+          4  6/18/18    10800 Sabo Rd           M            H         37.0   
+          
+            SUSPECT INJURY SUSPECT WEAPON OFFICER SEX 1 OFFICER RACE 1  OFFICER AGE 1  \textbackslash{}
+          0           None        Firearm             M              H             29   
+          1        Wounded        Firearm             M              H             29   
+          2        Wounded        Firearm             M              W             29   
+          3           None        Firearm             M              B             44   
+          4           None          Other             M              W             56   
+          
+            OFFICER INJURY 1 ON DUTY 1 OFFICER SEX 2 OFFICER RACE 2  OFFICER AGE 2  \textbackslash{}
+          0             None         Y           NaN            NaN            NaN   
+          1             None         Y           NaN            NaN            NaN   
+          2             None         Y           NaN            NaN            NaN   
+          3             None         N           NaN            NaN            NaN   
+          4             None         Y           NaN            NaN            NaN   
+          
+            OFFICER INJURY 2 ON DUTY 2 OFFICER SEX 3 OFFICER RACE 3  OFFICER AGE 3  \textbackslash{}
+          0              NaN       NaN           NaN            NaN            NaN   
+          1              NaN       NaN           NaN            NaN            NaN   
+          2              NaN       NaN           NaN            NaN            NaN   
+          3              NaN       NaN           NaN            NaN            NaN   
+          4              NaN       NaN           NaN            NaN            NaN   
+          
+            OFFICER INJURY 3 ON DUTY 3 OFFICER SEX 4 OFFICER RACE 4  OFFICER AGE 4  \textbackslash{}
+          0              NaN       NaN           NaN            NaN            NaN   
+          1              NaN       NaN           NaN            NaN            NaN   
+          2              NaN       NaN           NaN            NaN            NaN   
+          3              NaN       NaN           NaN            NaN            NaN   
+          4              NaN       NaN           NaN            NaN            NaN   
+          
+            OFFICER INJURY 4 ON DUTY 4 OFFICER SEX 5 OFFICER RACE 5  OFFICER AGE 5  \textbackslash{}
+          0              NaN       NaN           NaN            NaN            NaN   
+          1              NaN       NaN           NaN            NaN            NaN   
+          2              NaN       NaN           NaN            NaN            NaN   
+          3              NaN       NaN           NaN            NaN            NaN   
+          4              NaN       NaN           NaN            NaN            NaN   
+          
+            OFFICER INJURY 5 ON DUTY 5 OFFICER SEX 6 OFFICER RACE 6  OFFICER AGE 6  \textbackslash{}
+          0              NaN       NaN           NaN            NaN            NaN   
+          1              NaN       NaN           NaN            NaN            NaN   
+          2              NaN       NaN           NaN            NaN            NaN   
+          3              NaN       NaN           NaN            NaN            NaN   
+          4              NaN       NaN           NaN            NaN            NaN   
+          
+            OFFICER INJURY 6 ON DUTY 6 OFFICER SEX 7 OFFICER RACE 7  OFFICER AGE 7  \textbackslash{}
+          0              NaN       NaN           NaN            NaN            NaN   
+          1              NaN       NaN           NaN            NaN            NaN   
+          2              NaN       NaN           NaN            NaN            NaN   
+          3              NaN       NaN           NaN            NaN            NaN   
+          4              NaN       NaN           NaN            NaN            NaN   
+          
+            OFFICER INJURY 7 ON DUTY 7   RESPONSE TYPE NUM OF OFFICERS SYNOPSIS  \textbackslash{}
+          0              NaN       NaN           Other       2 or More      NaN   
+          1              NaN       NaN           Other       2 or More      NaN   
+          2              NaN       NaN  Emergency Call       2 or More      NaN   
+          3              NaN       NaN  Emergency Call               1      NaN   
+          4              NaN       NaN  Emergency Call               1      NaN   
+          
+            Population of Suspect Race  
+          0                     498466  
+          1                     498466  
+          2                     919668  
+          3                     919668  
+          4                     919668  
+\end{Verbatim}
+            
+    \subsubsection{Adapting the Data}\label{adapting-the-data}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}197}]:} \PY{n}{data} \PY{o}{=} \PY{n}{dataset}
+          \PY{n}{data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{DATE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LOCATION}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SYNOPSIS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}replacing the genders male, female, and juvenile with 1, 2, and 3}
+          \PY{n}{cols} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SUSPECT SEX}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER SEX 1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER SEX 2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER SEX 3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER SEX 4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER SEX 5}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER SEX 6}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER SEX 7}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{M}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Juvenile}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}replacing the races W, B, H, A, U, and Juvenile with 0, 1, 2, 3, 4, 5, and 6}
+          \PY{n}{cols} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SUSPECT RACE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER RACE 1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER RACE 2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER RACE 3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER RACE 4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER RACE 5}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER RACE 6}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER RACE 7}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{W}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{H}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}
+          \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+          \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{U}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}
+          \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Juvenile}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}replacing On Duty Y and N with 1 and 2}
+          \PY{n}{cols} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ON DUTY 1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ON DUTY 2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ON DUTY 3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ON DUTY 4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ON DUTY 5}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ON DUTY 6}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ON DUTY 7}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{N}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}replacing the suspect and officer injuries None, Wounded, Killed, and Unknown with 1, 2, 3, and 4}
+          \PY{n}{cols} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SUSPECT INJURY}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER INJURY 1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER INJURY 2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER INJURY 3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER INJURY 4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER INJURY 5}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER INJURY 6}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER INJURY 7}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{None}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wounded}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Killed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}
+          \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unknown}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}replacing number of officers 1 and 2 or More with 1 and 2}
+          \PY{n}{cols} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NUM OF OFFICERS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2 or More}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}replacing suspect weapon Unknown, None, firearm, and everything else with 1, 2, 3, 4}
+          \PY{n}{cols} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SUSPECT WEAPON}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unknown}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{None}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Firearm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}
+          \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Scissors and screwdriver}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+          \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Knife}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+          \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Vehicle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+          \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Machete}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+          \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pellet Gun}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+          \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Tuning fork}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+          \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Physical Force}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+          \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hammer}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+          \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Realistic BB gun}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+          \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Other}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}replacing response type Other, Emergency Call/Emer Call, and ER with 1, 2, and 3}
+          \PY{n}{cols} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{RESPONSE TYPE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Other}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Emergency Call}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Emer Call}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ER}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}final check}
+          \PY{n}{cols} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{columns}
+          \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}numeric}\PY{p}{,} \PY{n}{errors}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{coerce}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{data}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          
+          \PY{n}{data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}197}]:}    SUSPECT SEX  SUSPECT RACE  SUSPECT AGE  SUSPECT INJURY  SUSPECT WEAPON  \textbackslash{}
+          0            1             2         17.0               1               3   
+          1            1             2         19.0               2               3   
+          2            1             3         18.0               2               3   
+          3            1             3         33.0               1               3   
+          4            1             3         37.0               1               4   
+          
+             OFFICER SEX 1  OFFICER RACE 1  OFFICER AGE 1  OFFICER INJURY 1  ON DUTY 1  \textbackslash{}
+          0              1             3.0             29                 1          1   
+          1              1             3.0             29                 1          1   
+          2              1             1.0             29                 1          1   
+          3              1             2.0             44                 1          2   
+          4              1             1.0             56                 1          1   
+          
+             OFFICER SEX 2  OFFICER RACE 2  OFFICER AGE 2  OFFICER INJURY 2  ON DUTY 2  \textbackslash{}
+          0            0.0             0.0            0.0               0.0        0.0   
+          1            0.0             0.0            0.0               0.0        0.0   
+          2            0.0             0.0            0.0               0.0        0.0   
+          3            0.0             0.0            0.0               0.0        0.0   
+          4            0.0             0.0            0.0               0.0        0.0   
+          
+             OFFICER SEX 3  OFFICER RACE 3  OFFICER AGE 3  OFFICER INJURY 3  ON DUTY 3  \textbackslash{}
+          0            0.0             0.0            0.0               0.0        0.0   
+          1            0.0             0.0            0.0               0.0        0.0   
+          2            0.0             0.0            0.0               0.0        0.0   
+          3            0.0             0.0            0.0               0.0        0.0   
+          4            0.0             0.0            0.0               0.0        0.0   
+          
+             OFFICER SEX 4  OFFICER RACE 4  OFFICER AGE 4  OFFICER INJURY 4  ON DUTY 4  \textbackslash{}
+          0            0.0             0.0            0.0               0.0        0.0   
+          1            0.0             0.0            0.0               0.0        0.0   
+          2            0.0             0.0            0.0               0.0        0.0   
+          3            0.0             0.0            0.0               0.0        0.0   
+          4            0.0             0.0            0.0               0.0        0.0   
+          
+             OFFICER SEX 5  OFFICER RACE 5  OFFICER AGE 5  OFFICER INJURY 5  ON DUTY 5  \textbackslash{}
+          0            0.0             0.0            0.0               0.0        0.0   
+          1            0.0             0.0            0.0               0.0        0.0   
+          2            0.0             0.0            0.0               0.0        0.0   
+          3            0.0             0.0            0.0               0.0        0.0   
+          4            0.0             0.0            0.0               0.0        0.0   
+          
+             OFFICER SEX 6  OFFICER RACE 6  OFFICER AGE 6  OFFICER INJURY 6  ON DUTY 6  \textbackslash{}
+          0            0.0             0.0            0.0               0.0        0.0   
+          1            0.0             0.0            0.0               0.0        0.0   
+          2            0.0             0.0            0.0               0.0        0.0   
+          3            0.0             0.0            0.0               0.0        0.0   
+          4            0.0             0.0            0.0               0.0        0.0   
+          
+             OFFICER SEX 7  OFFICER RACE 7  OFFICER AGE 7  OFFICER INJURY 7  ON DUTY 7  \textbackslash{}
+          0            0.0             0.0            0.0               0.0        0.0   
+          1            0.0             0.0            0.0               0.0        0.0   
+          2            0.0             0.0            0.0               0.0        0.0   
+          3            0.0             0.0            0.0               0.0        0.0   
+          4            0.0             0.0            0.0               0.0        0.0   
+          
+             RESPONSE TYPE  NUM OF OFFICERS  Population of Suspect Race  
+          0            1.0              2.0                    498466.0  
+          1            1.0              2.0                    498466.0  
+          2            2.0              2.0                    919668.0  
+          3            2.0              1.0                    919668.0  
+          4            2.0              1.0                    919668.0  
+\end{Verbatim}
+            
+    \subsubsection{Logistic Regression Algorithm to predict suspect
+injury}\label{logistic-regression-algorithm-to-predict-suspect-injury}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}198}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{cross\PYZus{}validation} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LogisticRegression}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{LabelEncoder}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{classification\PYZus{}report}\PY{p}{,} \PY{n}{confusion\PYZus{}matrix}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{accuracy\PYZus{}score}
+          
+          \PY{n}{y} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SUSPECT INJURY}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{c+c1}{\PYZsh{}too many NaN values}
+          \PY{n}{x} \PY{o}{=} \PY{n}{data}
+          \PY{n}{x}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER SEX 2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER RACE 2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER AGE 2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER INJURY 2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ON DUTY 2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER SEX 3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER RACE 3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER AGE 3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER INJURY 3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ON DUTY 3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER SEX 4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER RACE 4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER AGE 4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER INJURY 4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ON DUTY 4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER SEX 5}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER RACE 5}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER AGE 5}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER INJURY 5}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ON DUTY 5}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER SEX 6}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER RACE 6}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER AGE 6}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER INJURY 6}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ON DUTY 6}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER SEX 7}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER RACE 7}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER AGE 7}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OFFICER INJURY 7}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ON DUTY 7}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{RESPONSE TYPE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          
+          \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}validation}\PY{p}{,} \PY{n}{Y\PYZus{}train}\PY{p}{,} \PY{n}{Y\PYZus{}validation} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.20}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{7}\PY{p}{)}
+          
+          \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{7}\PY{p}{)}
+          
+          \PY{n}{logmodel} \PY{o}{=} \PY{n}{LogisticRegression}\PY{p}{(}\PY{p}{)}
+          \PY{n}{logmodel}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}198}]:} LogisticRegression(C=1.0, class\_weight=None, dual=False, fit\_intercept=True,
+                    intercept\_scaling=1, max\_iter=100, multi\_class='ovr', n\_jobs=1,
+                    penalty='l2', random\_state=None, solver='liblinear', tol=0.0001,
+                    verbose=0, warm\_start=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}199}]:} \PY{n}{predictions} \PY{o}{=} \PY{n}{logmodel}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+          \PY{n+nb}{print} \PY{p}{(}\PY{n}{classification\PYZus{}report}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{predictions}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+             precision    recall  f1-score   support
+
+          1       0.17      0.14      0.15         7
+          2       0.44      0.67      0.53        12
+          3       0.00      0.00      0.00         5
+
+avg / total       0.27      0.38      0.31        24
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/anaconda3/lib/python3.6/site-packages/sklearn/metrics/classification.py:1135: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples.
+  'precision', 'predicted', average, warn\_for)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}200}]:} \PY{c+c1}{\PYZsh{}Accuracy score}
+          \PY{n}{log\PYZus{}accuracy\PYZus{}score} \PY{o}{=} \PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{predictions}\PY{p}{)}
+          \PY{n}{log\PYZus{}accuracy\PYZus{}score}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}200}]:} 0.375
+\end{Verbatim}
+            
+    \subsubsection{Logistic Regression Algorithm to predict suspect
+race}\label{logistic-regression-algorithm-to-predict-suspect-race}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}201}]:} \PY{n}{y} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SUSPECT RACE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          
+          \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}validation}\PY{p}{,} \PY{n}{Y\PYZus{}train}\PY{p}{,} \PY{n}{Y\PYZus{}validation} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.20}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{7}\PY{p}{)}
+          
+          \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{7}\PY{p}{)}
+          
+          \PY{n}{logmodel} \PY{o}{=} \PY{n}{LogisticRegression}\PY{p}{(}\PY{p}{)}
+          \PY{n}{logmodel}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}201}]:} LogisticRegression(C=1.0, class\_weight=None, dual=False, fit\_intercept=True,
+                    intercept\_scaling=1, max\_iter=100, multi\_class='ovr', n\_jobs=1,
+                    penalty='l2', random\_state=None, solver='liblinear', tol=0.0001,
+                    verbose=0, warm\_start=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}202}]:} \PY{n}{predictions} \PY{o}{=} \PY{n}{logmodel}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+          \PY{n+nb}{print} \PY{p}{(}\PY{n}{classification\PYZus{}report}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{predictions}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+             precision    recall  f1-score   support
+
+          1       0.00      0.00      0.00         4
+          2       0.80      1.00      0.89         8
+          3       0.75      1.00      0.86         6
+          5       0.00      0.00      0.00         2
+          6       0.67      1.00      0.80         4
+
+avg / total       0.57      0.75      0.64        24
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/anaconda3/lib/python3.6/site-packages/sklearn/metrics/classification.py:1135: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples.
+  'precision', 'predicted', average, warn\_for)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}203}]:} \PY{c+c1}{\PYZsh{}Accuracy score}
+          \PY{n}{log\PYZus{}accuracy\PYZus{}score} \PY{o}{=} \PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{predictions}\PY{p}{)}
+          \PY{n}{log\PYZus{}accuracy\PYZus{}score}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}203}]:} 0.75
+\end{Verbatim}
+            
+    \section{Findings}\label{findings}
+
+    Most of the graphs showed similar results between the current data set
+and the previous study. An exception, however, is that in the current
+data set a higher percentage of male officers were involved in the
+shootings. Also, in the current data set there is a peak in the officer
+ages graph at around 50 years old along with the peak at 30-39 years old
+which was shared between the two data sets.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
